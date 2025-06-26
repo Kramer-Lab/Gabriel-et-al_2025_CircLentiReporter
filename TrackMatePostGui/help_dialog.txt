@@ -1,0 +1,107 @@
+Settings:
+
+        Main Folder
+            Choose a folder which contains the tm-output.csv files
+            (suffix can be changed in advanced settings)
+
+        Digits and delimiter
+            The PostProcessor can combine data from several output_files,
+            if these have the same name base name, followed by a separator
+            and counting numbers. Note that all numbers have the
+            same amount of digits (i.e. start with 001 for three digits).
+
+            In case of problems, double-check all file name formats,
+            rename or move files whose names do not follow the pattern,
+            delete delimiter, or set digits to 0
+
+            If digits is set to 0, all files are processed individually.
+
+        Channels
+            Provide number of channels present in the data. Must not
+            exceed number of channels in the data. The PostProcessor will
+            start to extract data from Channel 1 until number of channels
+            given is reached.
+
+        Tracking Channel
+            Provide the number of the channel containing the tracking
+            marker.
+
+        Channel Names
+            You can provide names for the channels (e.g. YFP, GFP_bAct).
+            These names will appear in the output Excel files and Figures.
+            Do not use special characters other than underscores (i.e.:_).
+
+            Renaming Channels does not affect #Channels to be used.
+
+        Minimum Timepoints Per Track
+            The minimum of consecutive timepoints that must contain to
+            a to appear in the output. Higher numbers also speed up
+            processing.
+
+        ADVANCED SETTINGS
+
+        Default advanced settings are optimized for using U-2 OS cells,
+        a H2B-coupled traking marker, and and imaging interval of 1h.
+        May have to be adjusted for other experimental setups.
+
+        Threshold size jumps
+            Minimum relative change that is defined as jump in nuclear size
+
+            Sudden jumps in nuclear size usually occur due to one of
+            three reasons:
+            (1) the cell undergoes division
+            (2) the cell moves moves into or out of the imaging frame
+            (3) segmentation or tracking errors
+            PostProcessor detects size jumps and flags timepoints if
+            not related to division (tracking marker peak together or
+            followed by size jump, see below).
+
+            High values will result in less stringent quality control,
+            whereas too low values may sort out tracks from nuclei which
+            undergo normal fluctuations in nucleus area.
+
+            May be lowered for shorter imaging intervals.
+
+            Can be set to very high values to disable Qualitiy Control
+            based on cell size.
+
+        Threshold tracking marker division peak
+
+            PostProcessor detects peaks in tracking marker intensity to
+            detect cell divisions. This is due to the observation that
+            histone-coupled fluorescence markers condense in bright spots
+            during cell division together with the chromatides, resulting in
+            apparent small nucleus size and a peak of average intensity. Peaks are
+            detected by:
+                (1) subtracting a running-avarage from 7 timepoints to eliminate
+                    trends
+                (2) detecting peaks as values that are greater than
+            standard deviation multiplied by the given threshold.
+
+            If value is negative, detects troughs in tracking marker average
+            intensity, which may be useful for non-histone based nuclear markers.
+
+            May be adjusted for different imaging intervals.
+
+        Threshold tracking marker jumps
+
+            Large jumps in average tracking marker intensity can be due:
+                (1) the cell undergoes division (see above)
+                (2) artifacts/cell debris overlaying the nucelus
+                (3) segmentation or tracking errors
+            PostProcessor detects these jumps and flags timepoints if
+            not related (+/- 2 hours to division.
+
+            High values will result in less stringent quality control,
+            whereas too low values may sort tracks from nuclei which undergo
+            normal fluctuations in tracking marker intensity.
+
+            Can be set to very high values to disable Qualitiy Control
+            based on tracking marker intensity.
+
+        Transform timepoints
+
+            Quality control, in particular detection of divisions, is optimized
+            for tracking interval of 1h and is less reliable at much shorter intervals.
+            If *transform timepoints* is enabled, QC runs on subset of figures representing
+            an imaging inteval of ~ 1h. Has no effect for imaging intervals >35 min.
