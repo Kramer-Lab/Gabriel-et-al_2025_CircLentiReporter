@@ -25,13 +25,18 @@
   
   INPUTS
 
+<img src="./doc/GUI_start.png" alt="GUI at start" width="500"/>
+
 ==> GUI expects files to be named in a machine readable way. It can combine replica files to datasets if they have the exactly same name and end in replica numbers (e.g. "_01", "_02" and so on). If that does not work, set replica digits to 0 to not combine files into datasets
 - Choose an input Folder (output folder of batcher)
 - Select the file suffix (“_tm-output.csv” for TM-GUI, “-spots.csv” for batcher data)
 -	Define replica digits(e.g.: “00”)/delimiter(e.g.:”_”
     -	This is expected to be the final number before the file suffix, and has to have the same number of digits for all files, separated from the rest of the file name by the delimiter. All files having the same name except the replica number are combined into one dataset
     -	When input folder is selected and everthings alright with the naming, number of files and datasets are depicted
-    -	If anything is wrong, an error text will appear
+
+     -<img src="./doc/GUI before processing.png" alt="GUI with test_data as input" width="500"/>
+
+ 	  -	If anything is wrong, an error text will appear
       - double check/adapt suffix/digits/delimiter pattern
       - check the highlighted file for naming error, rename or remove this file from the folder
       - update by changing forth and back digits number
@@ -48,11 +53,22 @@
   OUTPUT
   - one excel file per dataset (or per file if digits is set to 0) with multiple sheets:
     - overview of QC process
+
+    - <img src="./doc/Excel_1.png" alt="QC Overview" width="500"/>
     - div_flags: all cell numbers with timepoints of divisions, FLAGs and whether they are approved
+
+    - <img src="./doc/Excel_2.png" alt="FLAGs and Divisions" width="500"/>    
+
     - per color:
       - raw time series of all cells
       - raw time series of approved cells
       - raw time series of approved cells, with extrapolated values at division time points
       - normalized time series of approved cells, with extrapolated values at division time points
+      - <img src="./doc/Excel_3.png" alt="Raw Data per Cell" width="500"/>
   - overview plots from normalized data for each data set
+
+  - <img src="./doc/Output.png" alt="Output Overview Plot" width="900"/>
+  
   - a "used_settings.txt" file including all settings and a list of processed files
+
+ TEST DATA
