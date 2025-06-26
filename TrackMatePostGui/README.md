@@ -8,7 +8,15 @@
    Written in Python 3.9
    Dependencies: PyQT5, Pandas, Matplotlib, openpyxl 
 
+[install/run]:
 
+    with conda:
+     ==> cd .../TrackMatePostGui/env
+     conda install env environment.yml
+     conda activate TrackMatePostGui
+     python main.py
+
+<img src="./doc/GUI_start.png" alt="GUI at start" width="500"/>
 
   OBJECTIVE
   - tracking is not error free, so TrackMatePostGui is to qualtiy control tracks and filter for minimal length
@@ -24,8 +32,6 @@
   - data at timepoints of division is extrapolated from surrounding time points
   
   INPUTS
-
-<img src="./doc/GUI_start.png" alt="GUI at start" width="500"/>
 
 ==> GUI expects files to be named in a machine readable way. It can combine replica files to datasets if they have the exactly same name and end in replica numbers (e.g. "_01", "_02" and so on). If that does not work, set replica digits to 0 to not combine files into datasets
 - Choose an input Folder (output folder of batcher)
@@ -72,3 +78,5 @@
   - a "used_settings.txt" file including all settings and a list of processed files
 
  TEST DATA
+
+ download the test data (three .csv files) and process using the GUI
