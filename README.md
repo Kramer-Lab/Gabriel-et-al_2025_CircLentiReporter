@@ -1,15 +1,17 @@
 # Gabriel-et-al_2025_CircLentiReporter
-Scripts used for data analysis and preprocessing as used in the manuscript "tbd" published in "tbd"
+Scripts used for data analysis and preprocessing as used in the manuscript "A lentiviral fluorescent reporter to study circadian rhythms in single cells" published on "BioRXIV"
 
 # Fiji Macros
 
-##Calculation_illumination_correction.ijm
+  ## Calculation_illumination_correction.ijm
 
-  OBJECTIVE:
+OBJECTIVE:
   - calculates an illumination function from a stack of (multicolor) microscopy images, which can be used to correct uneven illumination.
-  INPUTS:
+
+INPUTS:
   - input image stack should have multiple images of backgroud recordings (e.g. image medium only) recorded with the same settings as the expreimental images
-  FUNCTION:
+
+FUNCTION:
   - for each color,
     - for each each picture:
       - picture is median filteres (radius=5)
@@ -18,17 +20,20 @@ Scripts used for data analysis and preprocessing as used in the manuscript "tbd"
     - the average of all relative intensities is calculated by Z-projection
     - this 'correction_function' is stored as a .tif file and can be used for illimunation correction
    
-##Preprocessing_illumunation_correction_batch_32bit.ijm
+  ## Preprocessing_illumunation_correction_batch_32bit.ijm
 
-  OBJECTIVE 
+OBJECTIVE 
   - corrects for uneven illumiation using 'correction_functions'
   - subtracts background
   - (optional) applies binning (2x2) or (4x4) using average
- INPUTS 
+
+INPUTS 
   - which channel(s) of original images to process and store in the preprocessed files
   - whether to apply binning (can be 0 = no binning, 2, 4)
   - input folder with .tif, .tiff or .nd2 files to process (file dialog will open)
   - correction_function for each channel to process (file dialog will open)
+
+    <img src="./TrackMatePostGui/doc/preprocessing.png" alt="GUI at start" width="250"/>
   FUNCTION
   - converts image to 32-bit
   - corrects the input files illumination by dividing each image by the relative pattern
