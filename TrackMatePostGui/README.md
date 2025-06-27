@@ -2,13 +2,13 @@
  Postprocessing of Trackmate Output files including QC, GUI
 
 
+## [build]: 
 
-[build]: 
    working environment.yml provided in env folder. 
    Written in Python 3.9
    Dependencies: PyQT5, Pandas, Matplotlib, openpyxl 
 
-[install/run]:
+## [install/run]:
 
     with conda:
      ==> cd .../TrackMatePostGui/env
@@ -16,12 +16,14 @@
      conda activate TrackMatePostGui
      python main.py
 
-<img src="./doc/GUI_start.png" alt="GUI at start" width="500"/>
+    <img src="./doc/GUI_start.png" alt="GUI at start" width="500"/>
 
-  OBJECTIVE
+  ## OBJECTIVE
+  
   - tracking is not error free, so TrackMatePostGui is to qualtiy control tracks and filter for minimal length
   - Optimized for U2OS cells, an histone-based tracking marker, and an imaging interval of 1h
-  BASIC CONCEPT
+  ## BASIC CONCEPT
+  
   - cells are tracked by a histone based tracking marker, thus signal condenses when cells devide
   - jumps in object size or tracking marker intensity usually point to wrong segmmentation or tracking (or edge effects)
   - however, when cells divide, changes in traking marker or size ARE normal
@@ -31,7 +33,7 @@
   - tracks are also filtered out if detected divisions are closer than 15 h (probably not both division events)
   - data at timepoints of division is extrapolated from surrounding time points
   
-  INPUTS
+  ## INPUTS
 
 ==> GUI expects files to be named in a machine readable way. It can combine replica files to datasets if they have the exactly same name and end in replica numbers (e.g. "_01", "_02" and so on). If that does not work, set replica digits to 0 to not combine files into datasets
 - Choose an input Folder (output folder of batcher)
@@ -56,27 +58,30 @@
 -	If using very short tracking intervals (<35 min), enabling “Transform Timepoints” may improve accuracy of QC, as settings are optimized for an interval of 60 min. Quality control will then use only timepoints in an interval of close to 60 min to evaluate accurate tracking. 
 -	Advanced settings can also be modified to optimize accuracy, but performance should be evaluated with caution. May be necessary to adapt to other cell lines, tracking marker or imaging interval. As of to date, default advanced settings can only be changed within the python script. 
 
-  OUTPUT
+  ## OUTPUTS
+  
   - one excel file per dataset (or per file if digits is set to 0) with multiple sheets:
     - overview of QC process
 
-    - <img src="./doc/Excel_1.png" alt="QC Overview" width="500"/>
+      <img src="./doc/Excel_1.png" alt="QC Overview" width="500"/>
     - div_flags: all cell numbers with timepoints of divisions, FLAGs and whether they are approved
 
-    - <img src="./doc/Excel_2.png" alt="FLAGs and Divisions" width="500"/>    
+      <img src="./doc/Excel_2.png" alt="FLAGs and Divisions" width="500"/>    
 
     - per color:
       - raw time series of all cells
       - raw time series of approved cells
       - raw time series of approved cells, with extrapolated values at division time points
       - normalized time series of approved cells, with extrapolated values at division time points
-      - <img src="./doc/Excel_3.png" alt="Raw Data per Cell" width="500"/>
+        <img src="./doc/Excel_3.png" alt="Raw Data per Cell" width="500"/>
   - overview plots from normalized data for each data set
 
-  - <img src="./doc/Output.png" alt="Output Overview Plot" width="900"/>
+  <img src="./doc/Output.png" alt="Output Overview Plot" width="900"/>
   
   - a "used_settings.txt" file including all settings and a list of processed files
 
- TEST DATA
+  <img src="./doc/used_settings.png" alt="Output Overview Plot" width="400"/>
+
+ ## TEST
 
  download the test data (three .csv files) and process using the GUI
